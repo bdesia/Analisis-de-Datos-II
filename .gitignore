@@ -1,0 +1,10 @@
+# Enunciado de la actividad
+ACTIVIDAD 1.pdf
+
+# Jupyter / Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
