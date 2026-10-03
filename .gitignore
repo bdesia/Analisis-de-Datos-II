@@ -1,6 +1,8 @@
 # Enunciado de la actividad
 ACTIVIDAD 1.pdf
 ACTIVIDAD 2.pdf
+ACTIVIDAD 3.pdf
+ACTIVIDAD 4.pdf
 
 # Jupyter / Python
 .ipynb_checkpoints/
@@ -9,3 +11,6 @@ __pycache__/
 .venv/
 venv/
 .env
+
+# Datos descargados automaticamente por la notebook de la actividad 3
+data/fashion-mnist/
