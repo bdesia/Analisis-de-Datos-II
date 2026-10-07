@@ -13,10 +13,13 @@ The project was structured as follows.
 
 ```
 ├── data                                # Data. Here you can find the csv used for activities 1 and 2 (ds_salaries.csv).
+│   └── fashion-mnist                   # Fashion MNIST files for activity 3 (downloaded automatically by the notebook, not tracked).
 ├── ACTIVIDAD 1.pdf                     # Assignment statement for activity 1.
 ├── ACTIVIDAD 2.pdf                     # Assignment statement for activity 2.
+├── ACTIVIDAD 3.pdf                     # Assignment statement for activity 3.
 ├── Actividad_1.ipynb                   # Jupyter notebook for activity 1 (executed, with outputs).
-└── Actividad_2.ipynb                   # Jupyter notebook for activity 2 (executed, with outputs).
+├── Actividad_2.ipynb                   # Jupyter notebook for activity 2 (executed, with outputs).
+└── Actividad_3.ipynb                   # Jupyter notebook for activity 3 (executed, with outputs).
 ```
 
 ## Activities
@@ -46,3 +49,17 @@ Analysis of data quality, distribution drift and anomalies on the same [Data Sci
 - Analysis of one outlier flagged by both methods (`EX` / 15,000 USD / `CA`), showing it is a multivariate anomaly rather than a univariate one.
 
 *Notebook:* [Actividad_2.ipynb](Actividad_2.ipynb)
+
+**Activity #3: Dimensionality reduction and clustering**
+
+Unsupervised analysis of the [Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist) dataset (70,000 28x28 grayscale images of Zalando clothing items, 10 balanced classes). Each image is represented as a vector of 784 pixel intensities rescaled to [0, 1]; the work is done on a stratified sample of 10,000 images. Labels are only used for interpretation, never for fitting or choosing hyperparameters.
+
+*Main features*
+
+- Exploratory analysis: examples and mean image per class, intensity distribution, per-pixel variability, and cosine similarity between class prototypes (Pullover/Coat/Shirt reach 0.98-0.99).
+- Dimensionality reduction with PCA: 83 components (out of 784) retain 90% of the variance; components and reconstructions are plotted as images for interpretation.
+- Clustering with K-means and agglomerative (Ward) clustering, choosing k = 8 with Silhouette and Davies-Bouldin, and comparing both with internal (Silhouette, Davies-Bouldin, Calinski-Harabasz) and external (ARI, AMI) metrics. K-means is selected.
+- Interpretation of each cluster through its centroid reconstructed in pixel space, its class composition and its most representative images: clusters group by silhouette and tone rather than by commercial category.
+- 2D visualization with UMAP on the original pixels: density map, small-multiple panels by class and by cluster, and detection of the most isolated points.
+
+*Notebook:* [Actividad_3.ipynb](Actividad_3.ipynb) (requires `umap-learn`)
