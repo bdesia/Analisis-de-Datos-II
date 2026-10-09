@@ -12,14 +12,16 @@ This repository contains different activities solved during the course.
 The project was structured as follows.
 
 ```
-├── data                                # Data. Here you can find the csv used for activities 1 and 2 (ds_salaries.csv).
+├── data                                # Data. Here you can find the csv used for activities 1 and 2 (ds_salaries.csv) and 4 (census_income.csv).
 │   └── fashion-mnist                   # Fashion MNIST files for activity 3 (downloaded automatically by the notebook, not tracked).
 ├── ACTIVIDAD 1.pdf                     # Assignment statement for activity 1.
 ├── ACTIVIDAD 2.pdf                     # Assignment statement for activity 2.
 ├── ACTIVIDAD 3.pdf                     # Assignment statement for activity 3.
+├── ACTIVIDAD 4.pdf                     # Assignment statement for activity 4.
 ├── Actividad_1.ipynb                   # Jupyter notebook for activity 1 (executed, with outputs).
 ├── Actividad_2.ipynb                   # Jupyter notebook for activity 2 (executed, with outputs).
-└── Actividad_3.ipynb                   # Jupyter notebook for activity 3 (executed, with outputs).
+├── Actividad_3.ipynb                   # Jupyter notebook for activity 3 (executed, with outputs).
+└── Actividad_4.ipynb                   # Jupyter notebook for activity 4 (executed, with outputs).
 ```
 
 ## Activities
@@ -63,3 +65,17 @@ Unsupervised analysis of the [Fashion MNIST](https://github.com/zalandoresearch/
 - 2D visualization with UMAP on the original pixels: density map, small-multiple panels by class and by cluster, and detection of the most isolated points.
 
 *Notebook:* [Actividad_3.ipynb](Actividad_3.ipynb) (requires `umap-learn`)
+
+**Activity #4: Feature engineering, data leakage, bias audit and documentation**
+
+Linear regression to predict annual income (`income`) on a census dataset of 10,000 people (age, hours per week, education, employer type, marital status, sex, race and whether they were born in the US), with a bias audit by sensitive variables and a Model Card.
+
+*Main features*
+
+- Target analysis: strong right skew (4.45). Log overcorrects (-1.01), Box-Cox (λ ≈ 0.21) leaves it almost symmetric (0.06) and is selected.
+- Leakage-free 5-fold cross validation: imputation, splines on the numeric features, one-hot encoding and the Box-Cox transformation (`TransformedTargetRegressor`) are all refit inside each fold.
+- MAE comparison: Box-Cox target lowers MAE from ~30.8k to ~26.7k USD and removes negative predictions, at the cost of underestimating the mean (retransformation bias).
+- Bias audit by `sex` and `race` with out-of-fold predictions: large gaps in absolute MAE but similar relative MAE (0.46-0.50); a counterfactual test shows the model reproduces the income gaps in the data (+27% for men, +17% for White vs Black people).
+- Model Card with purpose, inputs/outputs, global and per-subgroup metrics, fairness considerations and limitations.
+
+*Notebook:* [Actividad_4.ipynb](Actividad_4.ipynb)
